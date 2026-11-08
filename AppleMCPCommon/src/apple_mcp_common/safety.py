@@ -12,6 +12,27 @@ from collections.abc import Mapping
 
 SAFETY_MODES: tuple[str, ...] = ("safe_readonly", "safe_manage", "full_access")
 
+# One variable that sets the default for every domain. A domain's own variable
+# (for example APPLE_NOTES_MCP_SAFETY_MODE) still wins when it is set.
+GLOBAL_SAFETY_ENV_VAR = "APPLE_MCP_SAFETY_MODE"
+
+
+def safety_env(env_var: str, default: str, environ: Mapping[str, str] | None = None) -> str:
+    """Return the raw safety value: the domain variable, else the global one, else ``default``."""
+    source = os.environ if environ is None else environ
+    if env_var in source:
+        return source[env_var]
+    return source.get(GLOBAL_SAFETY_ENV_VAR, default)
+
+
+def _source_var(env_var: str, environ: Mapping[str, str] | None = None) -> str | None:
+    """Name the variable that actually supplies the value, or None when both are unset."""
+    source = os.environ if environ is None else environ
+    if env_var in source:
+        return env_var
+    return GLOBAL_SAFETY_ENV_VAR if GLOBAL_SAFETY_ENV_VAR in source else None
+
+
 # Environment variable -> title of the matching setting in the Claude Desktop
 # extension (MCPB ``user_config``). Bundle manifests must use these titles.
 SAFETY_SETTING_TITLES: dict[str, str] = {
@@ -42,9 +63,11 @@ def how_to_set(env_var: str, value: str, title: str | None = None) -> str:
 
 
 def _invalid_value_note(env_var: str, effective_mode: str, environ: Mapping[str, str] | None) -> str | None:
-    raw = (os.environ if environ is None else environ).get(env_var)
-    if raw is None:
+    source_var = _source_var(env_var, environ)
+    if source_var is None:
         return None
+    raw = (os.environ if environ is None else environ)[source_var]
+    env_var = source_var
     value = raw.strip()
     if value in SAFETY_MODES or value.lower() == effective_mode:
         return None

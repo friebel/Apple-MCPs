@@ -82,3 +82,51 @@ def test_how_to_set_uses_an_explicit_desktop_title() -> None:
     assert "APPLE_SYSTEM_MCP_GUI_ALLOWED_APPS=com.apple.TextEdit" in text
     assert '"Apps that accept GUI input" to com.apple.TextEdit' in text
     assert "restart the MCP client" in text
+
+
+def test_safety_env_prefers_domain_variable_then_global_then_default() -> None:
+    from apple_mcp_common.safety import safety_env
+
+    domain = "APPLE_NOTES_MCP_SAFETY_MODE"
+    assert safety_env(domain, "safe_manage", {}) == "safe_manage"
+    assert safety_env(domain, "safe_manage", {"APPLE_MCP_SAFETY_MODE": "full_access"}) == "full_access"
+    assert safety_env(domain, "safe_manage", {"APPLE_MCP_SAFETY_MODE": "full_access", domain: "safe_readonly"}) == "safe_readonly"
+    assert safety_env(domain, "safe_manage", {domain: ""}) == ""
+
+
+def test_invalid_global_value_is_reported_under_its_own_name() -> None:
+    warning = safety_mode_warning("APPLE_NOTES_MCP_SAFETY_MODE", "safe_readonly", {"APPLE_MCP_SAFETY_MODE": "everything"})
+
+    assert warning is not None
+    assert "APPLE_MCP_SAFETY_MODE" in warning
+    assert safety_mode_warning("APPLE_NOTES_MCP_SAFETY_MODE", "safe_readonly", {}) is None
+
+
+def test_global_safety_mode_sets_every_domain_and_domain_variable_wins(monkeypatch) -> None:
+    import importlib
+
+    modules = [
+        ("apple_calendar_mcp.config", "safe_manage"),
+        ("apple_contacts_mcp.config", "safe_manage"),
+        ("apple_files_mcp.config", "safe_manage"),
+        ("apple_notes_mcp.config", "full_access"),
+        ("apple_numbers_mcp.config", "full_access"),
+        ("apple_reminders_mcp.config", "safe_manage"),
+        ("apple_system_mcp.config", "safe_manage"),
+        ("apple_messages_mcp.config", "full_access"),
+        ("apple_shortcuts_mcp.config", "full_access"),
+    ]
+    for var in [name for name in __import__("os").environ if name.endswith(("_SAFETY_MODE", "_SAFETY_PROFILE"))]:
+        monkeypatch.delenv(var)
+    for module_name, default in modules:
+        config = importlib.import_module(module_name)
+        config.load_settings.cache_clear()
+        assert config.load_settings().safety_mode == default, module_name
+    monkeypatch.setenv("APPLE_MCP_SAFETY_MODE", "safe_readonly")
+    monkeypatch.setenv("APPLE_NOTES_MCP_SAFETY_MODE", "full_access")
+    for module_name, _ in modules:
+        config = importlib.import_module(module_name)
+        config.load_settings.cache_clear()
+        expected = "full_access" if module_name == "apple_notes_mcp.config" else "safe_readonly"
+        assert config.load_settings().safety_mode == expected, module_name
+        config.load_settings.cache_clear()

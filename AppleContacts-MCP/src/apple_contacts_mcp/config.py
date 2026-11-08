@@ -4,6 +4,8 @@ from functools import lru_cache
 from pathlib import Path
 from typing import Literal, cast
 
+from apple_mcp_common.safety import safety_env
+
 SafetyMode = Literal["safe_readonly", "safe_manage", "full_access"]
 VALID_SAFETY_MODES = frozenset({"safe_readonly", "safe_manage", "full_access"})
 
@@ -23,7 +25,7 @@ class Settings:
 @lru_cache(maxsize=1)
 def load_settings() -> Settings:
     package_dir = Path(__file__).resolve().parent
-    raw_safety_mode = os.environ.get("APPLE_CONTACTS_MCP_SAFETY_MODE", "safe_manage").strip()
+    raw_safety_mode = safety_env("APPLE_CONTACTS_MCP_SAFETY_MODE", "safe_manage").strip()
     if raw_safety_mode not in VALID_SAFETY_MODES:
         raw_safety_mode = "safe_readonly"
 

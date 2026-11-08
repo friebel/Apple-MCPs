@@ -5,6 +5,7 @@ from dataclasses import dataclass
 from pathlib import Path
 
 from apple_mail_mcp.models import SafetyProfile
+from apple_mcp_common.safety import safety_env
 
 SUPPORTED_TRANSPORTS = {"stdio", "streamable-http"}
 DEFAULT_SCRIPT_TIMEOUT_SECONDS = 120
@@ -54,7 +55,7 @@ def _parse_script_timeout(value: str | None) -> int:
 
 
 def load_settings() -> Settings:
-    raw_profile = os.getenv("APPLE_MAIL_MCP_SAFETY_PROFILE", SafetyProfile.SAFE_MANAGE.value).strip()
+    raw_profile = safety_env("APPLE_MAIL_MCP_SAFETY_PROFILE", SafetyProfile.SAFE_MANAGE.value).strip()
     try:
         safety_profile = SafetyProfile(raw_profile)
     except ValueError:

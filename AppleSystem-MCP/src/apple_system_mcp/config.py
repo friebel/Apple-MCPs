@@ -2,6 +2,8 @@ import os
 from dataclasses import dataclass
 from functools import lru_cache
 
+from apple_mcp_common.safety import safety_env
+
 GUI_ALLOWED_APPS_ENV_VAR = "APPLE_SYSTEM_MCP_GUI_ALLOWED_APPS"
 # Title of the matching Claude Desktop extension setting (MCPB user_config).
 GUI_ALLOWED_APPS_TITLE = "Apps that accept GUI input"
@@ -30,7 +32,7 @@ def _parse_int(value: str | None, default: int) -> int:
 
 @lru_cache(maxsize=1)
 def load_settings() -> Settings:
-    safety_mode = os.environ.get("APPLE_SYSTEM_MCP_SAFETY_MODE", "safe_manage").strip().lower()
+    safety_mode = safety_env("APPLE_SYSTEM_MCP_SAFETY_MODE", "safe_manage").strip().lower()
     if safety_mode not in {"safe_readonly", "safe_manage", "full_access"}:
         safety_mode = "safe_readonly"
     return Settings(

@@ -3,6 +3,8 @@ from dataclasses import dataclass
 from functools import lru_cache
 from pathlib import Path
 
+from apple_mcp_common.safety import safety_env
+
 
 @dataclass(frozen=True)
 class Settings:
@@ -50,7 +52,7 @@ def _parse_roots(value: str | None) -> tuple[Path, ...]:
 
 @lru_cache(maxsize=1)
 def load_settings() -> Settings:
-    safety_mode = os.environ.get("APPLE_FILES_MCP_SAFETY_MODE", "safe_manage").strip().lower()
+    safety_mode = safety_env("APPLE_FILES_MCP_SAFETY_MODE", "safe_manage").strip().lower()
     if safety_mode not in {"safe_readonly", "safe_manage", "full_access"}:
         safety_mode = "safe_readonly"
     return Settings(
