@@ -138,6 +138,12 @@ class AppleNotesBridge:
         current = None
         if title is not None or body_html is not None or tags:
             current = self.get_note(note_id)
+            if current.password_protected:
+                raise NotesBridgeError(
+                    "NOTE_LOCKED",
+                    "This note is password-protected; its content cannot be read or rewritten.",
+                    "Unlock and edit it in Notes.app. Moving the note to another folder is still supported.",
+                )
             if current.attachments or current.attachment_count:
                 raise NotesBridgeError(
                     "NOTE_HAS_ATTACHMENTS",

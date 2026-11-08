@@ -41,6 +41,7 @@ binary_for() {
     AppleMessages-MCP) echo "apple-messages-mcp" ;;
     AppleContacts-MCP) echo "apple-contacts-mcp" ;;
     AppleNotes-MCP) echo "apple-notes-mcp" ;;
+    AppleNumbers-MCP) echo "apple-numbers-mcp" ;;
     AppleShortcuts-MCP) echo "apple-shortcuts-mcp" ;;
     Apple-Tools-MCP) echo "apple-tools-mcp" ;;
     *)
@@ -103,6 +104,7 @@ AppleReminders-MCP
 AppleMessages-MCP
 AppleContacts-MCP
 AppleNotes-MCP
+AppleNumbers-MCP
 AppleShortcuts-MCP
 Apple-Tools-MCP
 "

@@ -73,7 +73,7 @@ class BumpVersionTests(unittest.TestCase):
             make_repo(root)
             current, edits = bump_version.plan_edits("1.2.4", root)
             self.assertEqual(current, "1.2.3")
-            self.assertEqual(len(edits), 45)
+            self.assertEqual(len(edits), 49)
             mail_server = next(edit for edit in edits if edit.path == root / "AppleMail-MCP" / "server.json")
             self.assertIn('"version": "1.2.4"', mail_server.after)
             self.assertIn("bundle-5-1.2.2.mcpb", mail_server.after)

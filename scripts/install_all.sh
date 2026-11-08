@@ -36,6 +36,7 @@ PACKAGES=(
   "AppleMessages-MCP"
   "AppleContacts-MCP"
   "AppleNotes-MCP"
+  "AppleNumbers-MCP"
   "AppleShortcuts-MCP"
   "AppleFiles-MCP"
   "AppleSystem-MCP"

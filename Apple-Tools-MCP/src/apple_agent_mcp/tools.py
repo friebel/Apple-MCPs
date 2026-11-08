@@ -24,6 +24,27 @@ from apple_agent_mcp.bootstrap import ensure_domain_paths
 # Modules below import the domain packages, which a plain venv loads from sibling folders.
 ensure_domain_paths()
 
+from apple_numbers_mcp.tools import mcp as numbers_server
+from apple_numbers_mcp.tools import (
+    numbers_add_columns,
+    numbers_add_rows,
+    numbers_close_document,
+    numbers_create_document,
+    numbers_create_table,
+    numbers_delete_columns,
+    numbers_delete_rows,
+    numbers_export_document,
+    numbers_health,
+    numbers_list_documents,
+    numbers_list_sheets,
+    numbers_list_tables,
+    numbers_open_document,
+    numbers_read_range,
+    numbers_save_document,
+    numbers_set_format,
+    numbers_write_range,
+)
+
 from apple_agent_mcp.config import load_settings
 from apple_agent_mcp.conformance import enable_conformance_mode
 from apple_agent_mcp.contact_names import ContactNameResolver, annotate_conversations, annotate_messages
@@ -3333,6 +3354,23 @@ UNIFIED_TOOL_FUNCTIONS: list[FunctionType] = [
     notes_rename_folder,
     notes_delete_folder,
     notes_list_attachments,
+    numbers_health,
+    numbers_list_documents,
+    numbers_open_document,
+    numbers_create_document,
+    numbers_save_document,
+    numbers_close_document,
+    numbers_list_sheets,
+    numbers_list_tables,
+    numbers_create_table,
+    numbers_add_rows,
+    numbers_delete_rows,
+    numbers_add_columns,
+    numbers_delete_columns,
+    numbers_set_format,
+    numbers_read_range,
+    numbers_write_range,
+    numbers_export_document,
     messages_health,
     messages_list_conversations,
     messages_get_conversation,
@@ -3413,6 +3451,7 @@ STANDALONE_SERVERS: dict[str, AppleMCPServer] = {
     "maps": maps_server,
     "messages": messages_server,
     "notes": notes_server,
+    "numbers": numbers_server,
     "reminders": reminders_server,
     "shortcuts": shortcuts_server,
     "system": system_server,

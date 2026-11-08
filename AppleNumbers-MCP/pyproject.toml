@@ -1,0 +1,60 @@
+[build-system]
+requires = ["setuptools>=84.2.1", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "apple-numbers-mcp"
+version = "1.1.6"
+description = "Local Apple Numbers MCP server for macOS"
+readme = "README.md"
+license = "MIT"
+license-files = ["LICENSE"]
+requires-python = ">=3.11"
+keywords = ["mcp", "model-context-protocol", "macos", "apple", "ai-agent", "automation"]
+classifiers = [
+  "Development Status :: 5 - Production/Stable",
+  "Environment :: MacOS X",
+  "Intended Audience :: Developers",
+  "Operating System :: MacOS",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Programming Language :: Python :: 3.14",
+  "Topic :: Software Development :: Libraries :: Python Modules",
+]
+dependencies = [
+  "apple-mcp-common>=1.1.6,<2",
+  "mcp>=2.3.0,<3",
+  "pydantic>=2.14.1",
+]
+
+[project.urls]
+Homepage = "https://github.com/JonathanRReed/Apple-MCPs"
+Repository = "https://github.com/JonathanRReed/Apple-MCPs"
+Changelog = "https://github.com/JonathanRReed/Apple-MCPs/blob/main/CHANGELOG.md"
+Issues = "https://github.com/JonathanRReed/Apple-MCPs/issues"
+
+[project.scripts]
+apple-numbers-mcp = "apple_numbers_mcp.tools:main"
+
+[project.optional-dependencies]
+dev = [
+  "pytest>=8,<10",
+  "ruff>=0.17.2,<1",
+]
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.package-data]
+apple_numbers_mcp = ["scripts/*.js"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]
+
+[tool.uv.sources]
+apple-mcp-common = { workspace = true }

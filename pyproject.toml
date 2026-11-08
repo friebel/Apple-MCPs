@@ -9,6 +9,7 @@ members = [
   "AppleMaps-MCP",
   "AppleMessages-MCP",
   "AppleNotes-MCP",
+  "AppleNumbers-MCP",
   "AppleReminders-MCP",
   "AppleShortcuts-MCP",
   "AppleSystem-MCP",

@@ -152,5 +152,29 @@ def test_append_to_note_preserves_existing_content(monkeypatch) -> None:
     assert "Add flights" in result.note.body_html
 
 
+def test_get_note_truncates_to_max_chars(monkeypatch) -> None:
+    monkeypatch.setenv("APPLE_NOTES_MCP_SAFETY_MODE", "full_access")
+    load_settings.cache_clear()
+    monkeypatch.setattr(tools, "_bridge", lambda: FakeBridge())
+
+    result = tools.notes_get_note(note_id="note-1", max_chars="5")
+
+    assert result.ok is True
+    assert result.note.truncated is True
+    assert len(result.note.plaintext) <= 5
+    assert len(result.note.body_html) <= 5
+
+
+def test_get_note_rejects_invalid_max_chars(monkeypatch) -> None:
+    monkeypatch.setenv("APPLE_NOTES_MCP_SAFETY_MODE", "full_access")
+    load_settings.cache_clear()
+    monkeypatch.setattr(tools, "_bridge", lambda: FakeBridge())
+
+    result = tools.notes_get_note(note_id="note-1", max_chars=0)
+
+    assert result.ok is False
+    assert result.error.error_code == "INVALID_INPUT"
+
+
 def teardown_function() -> None:
     load_settings.cache_clear()

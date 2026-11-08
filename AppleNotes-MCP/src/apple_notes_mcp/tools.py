@@ -304,15 +304,23 @@ def notes_list_notes(
     annotations=ToolAnnotations(read_only_hint=True, idempotent_hint=True, open_world_hint=False),
     structured_output=True,
 )
-def notes_get_note(note_id: Annotated[str, Field(description=_NOTE_ID_DESCRIPTION)]) -> NoteResponse | ErrorResponse:
+def notes_get_note(
+    note_id: Annotated[str, Field(description=_NOTE_ID_DESCRIPTION)],
+    max_chars: Annotated[int | str | None, Field(description="Optional cap on the characters returned in plaintext and body_html each; truncated is set when text was cut. Omit for the full note.")] = None,
+) -> NoteResponse | ErrorResponse:
     try:
+        limit = _coerce_int_arg("max_chars", max_chars, minimum=1) if max_chars is not None else None
         note = _bridge().get_note(note_id)
         ensure_action_allowed("notes_get_note", note.account_name, note.folder_name)
+        if limit is not None and (len(note.plaintext) > limit or len(note.body_html) > limit):
+            note = note.model_copy(update={"plaintext": note.plaintext[:limit], "body_html": note.body_html[:limit], "truncated": True})
         return NoteResponse(note=note)
     except SafetyError as exc:
         return _error_response(exc.error_code, exc.message, exc.suggestion)
     except NotesBridgeError as exc:
         return _error_response(exc.error_code, exc.message, exc.suggestion)
+    except ValueError as exc:
+        return _error_response("INVALID_INPUT", str(exc), "Provide a positive max_chars.")
 
 
 @mcp.tool(

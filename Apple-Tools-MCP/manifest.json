@@ -102,6 +102,13 @@
       "required": false,
       "default": "full_access"
     },
+    "numbers_safety_mode": {
+      "type": "string",
+      "title": "Numbers safety mode",
+      "description": "Type exactly one of: safe_readonly, safe_manage, or full_access. safe_readonly: list and read only. safe_manage: also open, create, save, close, edit, format and export spreadsheets. full_access: same as safe_manage. This bundle's default is full_access. Sets APPLE_NUMBERS_MCP_SAFETY_MODE.",
+      "required": false,
+      "default": "full_access"
+    },
     "files_allowed_roots": {
       "type": "string",
       "title": "Folders the Files tools may access",
@@ -113,6 +120,13 @@
       "type": "string",
       "title": "Folders Messages may send files from",
       "description": "Optional comma-separated folder paths for attachments; ~ means your home folder. Leave empty to use the Files folders. Sets APPLE_MESSAGES_MCP_ALLOWED_ROOTS.",
+      "required": false,
+      "default": ""
+    },
+    "numbers_allowed_roots": {
+      "type": "string",
+      "title": "Folders Numbers may open from, save to and export to",
+      "description": "Optional comma-separated folder paths; ~ means your home folder. Leave empty to use the Files folders. Sets APPLE_NUMBERS_MCP_ALLOWED_ROOTS.",
       "required": false,
       "default": ""
     },
@@ -200,8 +214,10 @@
         "APPLE_NOTES_MCP_SAFETY_MODE": "${user_config.notes_safety_mode}",
         "APPLE_MESSAGES_MCP_SAFETY_MODE": "${user_config.messages_safety_mode}",
         "APPLE_SHORTCUTS_MCP_SAFETY_MODE": "${user_config.shortcuts_safety_mode}",
+        "APPLE_NUMBERS_MCP_SAFETY_MODE": "${user_config.numbers_safety_mode}",
         "APPLE_FILES_MCP_ALLOWED_ROOTS": "${user_config.files_allowed_roots}",
         "APPLE_SHORTCUTS_MCP_ALLOWED_ROOTS": "${user_config.shortcuts_allowed_roots}",
+        "APPLE_NUMBERS_MCP_ALLOWED_ROOTS": "${user_config.numbers_allowed_roots}",
         "APPLE_MESSAGES_MCP_ALLOWED_ROOTS": "${user_config.messages_allowed_roots}",
         "APPLE_MAIL_MCP_ALLOWED_ATTACHMENT_ROOT": "${user_config.mail_allowed_attachment_root}",
         "APPLE_MAIL_MCP_VISIBLE_DRAFTS": "${user_config.mail_visible_drafts}",

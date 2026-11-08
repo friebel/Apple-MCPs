@@ -14,7 +14,7 @@ from mcp import Client, StdioServerParameters
 SERVERS = (
     "apple-tools-mcp", "apple-calendar-mcp", "apple-contacts-mcp",
     "apple-files-mcp", "apple-mail-mcp", "apple-maps-mcp",
-    "apple-messages-mcp", "apple-notes-mcp", "apple-reminders-mcp",
+    "apple-messages-mcp", "apple-notes-mcp", "apple-numbers-mcp", "apple-reminders-mcp",
     "apple-shortcuts-mcp", "apple-system-mcp",
 )
 

@@ -76,6 +76,7 @@ on note_json(accountId, accountName, folderId, folderName, noteRef, includeBody)
 	set createdEpoch to 0
 	set modifiedEpoch to 0
 		set sharedValue to false
+		set passwordProtectedValue to false
 		try
 			tell application "Notes" to set rawTitleText to name of n
 			set titleText to my safe_text(rawTitleText)
@@ -99,6 +100,9 @@ on note_json(accountId, accountName, folderId, folderName, noteRef, includeBody)
 		try
 			tell application "Notes" to set sharedValue to shared of n
 		end try
+		try
+			tell application "Notes" to set passwordProtectedValue to password protected of n
+		end try
 	return "{" & ¬
 		quote & "note_id" & quote & ":" & my json_string(noteId) & "," & ¬
 		quote & "title" & quote & ":" & my json_string(titleText) & "," & ¬
@@ -109,6 +113,7 @@ on note_json(accountId, accountName, folderId, folderName, noteRef, includeBody)
 		quote & "created_epoch" & quote & ":" & createdEpoch & "," & ¬
 		quote & "modified_epoch" & quote & ":" & modifiedEpoch & "," & ¬
 			quote & "shared" & quote & ":" & my json_boolean(sharedValue) & "," & ¬
+		quote & "password_protected" & quote & ":" & my json_boolean(passwordProtectedValue) & "," & ¬
 		quote & "attachment_count" & quote & ":0," & ¬
 		quote & "plaintext" & quote & ":" & my json_string(plainText) & "," & ¬
 		quote & "body_html" & quote & ":" & my json_string(bodyHtml) & "," & ¬

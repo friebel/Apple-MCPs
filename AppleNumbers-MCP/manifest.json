@@ -1,0 +1,79 @@
+{
+  "$schema": "https://raw.githubusercontent.com/anthropics/mcpb/main/schemas/mcpb-manifest-v0.4.schema.json",
+  "manifest_version": "0.4",
+  "name": "apple-numbers",
+  "display_name": "Apple Numbers",
+  "version": "1.1.6",
+  "description": "Read, fill and export Apple Numbers spreadsheets on macOS.",
+  "long_description": "Local MCP server for Apple Numbers on macOS. Lists open documents, sheets and tables, reads and writes cell ranges, adds tables, opens spreadsheets and exports them to PDF, Excel or CSV. Uses JXA automation, so macOS asks once for permission to control Numbers.",
+  "icon": "icon.png",
+  "author": {
+    "name": "Jonathan Reed"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/JonathanRReed/Apple-MCPs"
+  },
+  "license": "MIT",
+  "keywords": [
+    "numbers",
+    "spreadsheet",
+    "apple",
+    "macos",
+    "automation",
+    "assistant"
+  ],
+  "compatibility": {
+    "platforms": [
+      "darwin"
+    ],
+    "runtimes": {
+      "python": ">=3.11"
+    }
+  },
+  "user_config": {
+    "numbers_safety_mode": {
+      "type": "string",
+      "title": "Numbers safety mode",
+      "description": "Type exactly one of: safe_readonly, safe_manage, or full_access. safe_readonly: list and read only. safe_manage: also open, write, create tables and export. full_access: same as safe_manage. This bundle's default is full_access. Sets APPLE_NUMBERS_MCP_SAFETY_MODE.",
+      "required": false,
+      "default": "full_access"
+    },
+    "numbers_allowed_roots": {
+      "type": "string",
+      "title": "Folders Numbers may open from and export to",
+      "description": "Optional comma-separated folder paths; ~ means your home folder. Leave empty to use Desktop, Documents, Downloads and iCloud Drive. Sets APPLE_NUMBERS_MCP_ALLOWED_ROOTS.",
+      "required": false,
+      "default": ""
+    }
+  },
+  "server": {
+    "type": "uv",
+    "entry_point": "server.py",
+    "mcp_config": {
+      "command": "uv",
+      "args": [
+        "run",
+        "--directory",
+        "${__dirname}",
+        "server.py"
+      ],
+      "env": {
+        "APPLE_NUMBERS_MCP_SAFETY_MODE": "${user_config.numbers_safety_mode}",
+        "APPLE_NUMBERS_MCP_ALLOWED_ROOTS": "${user_config.numbers_allowed_roots}"
+      }
+    }
+  },
+  "tools": [
+    {
+      "name": "search_tools",
+      "description": "Search available tools by keyword."
+    },
+    {
+      "name": "get_tool_info",
+      "description": "Read the schema and usage of an available tool."
+    }
+  ],
+  "tools_generated": true,
+  "prompts_generated": true
+}

@@ -9,7 +9,7 @@ from dataclasses import dataclass
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-PACKAGE_DIRS = ("AppleMCPCommon", "Apple-Tools-MCP", "Apple-Calendar-MCP", "AppleContacts-MCP", "AppleFiles-MCP", "AppleMail-MCP", "AppleMaps-MCP", "AppleMessages-MCP", "AppleNotes-MCP", "AppleReminders-MCP", "AppleShortcuts-MCP", "AppleSystem-MCP")
+PACKAGE_DIRS = ("AppleMCPCommon", "Apple-Tools-MCP", "Apple-Calendar-MCP", "AppleContacts-MCP", "AppleFiles-MCP", "AppleMail-MCP", "AppleMaps-MCP", "AppleMessages-MCP", "AppleNotes-MCP", "AppleNumbers-MCP", "AppleReminders-MCP", "AppleShortcuts-MCP", "AppleSystem-MCP")
 SERVER_DIRS = tuple(name for name in PACKAGE_DIRS if name != "AppleMCPCommon")
 PACKAGE_NAMES = {
     "AppleMCPCommon": "apple-mcp-common",
@@ -21,6 +21,7 @@ PACKAGE_NAMES = {
     "AppleMaps-MCP": "apple-maps-mcp",
     "AppleMessages-MCP": "apple-messages-mcp",
     "AppleNotes-MCP": "apple-mcp-notes",
+    "AppleNumbers-MCP": "apple-numbers-mcp",
     "AppleReminders-MCP": "apple-mcp-reminders",
     "AppleShortcuts-MCP": "apple-shortcuts-mcp",
     "AppleSystem-MCP": "apple-system-mcp",

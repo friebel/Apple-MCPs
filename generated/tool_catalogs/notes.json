@@ -243,13 +243,15 @@
         "notes get note"
       ],
       "argument_summary": [
-        "note_id: string (required)"
+        "note_id: string (required)",
+        "max_chars: integer (optional)"
       ],
       "description": "Fetch full details for an Apple Notes note by note_id.",
       "domain": "notes",
       "example_calls": [
         {
           "arguments": {
+            "max_chars": 1,
             "note_id": "example_note_id"
           },
           "tool": "notes_get_note"

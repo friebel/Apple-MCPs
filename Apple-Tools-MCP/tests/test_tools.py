@@ -84,6 +84,8 @@ def test_registered_tool_names_cover_core_domains() -> None:
     assert "messages_send_message" in tools.REGISTERED_TOOL_NAMES
     assert "contacts_search_contacts" in tools.REGISTERED_TOOL_NAMES
     assert "shortcuts_run_shortcut" in tools.REGISTERED_TOOL_NAMES
+    assert "numbers_read_range" in tools.REGISTERED_TOOL_NAMES
+    assert "numbers_write_range" in tools.REGISTERED_TOOL_NAMES
 
 
 def test_aio_prompt_list_includes_routing_and_contacts_prompts() -> None:

@@ -1,0 +1,46 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "io.github.JonathanRReed/apple-numbers-mcp",
+  "title": "Apple Numbers",
+  "description": "Read, fill and export Apple Numbers spreadsheets on macOS.",
+  "repository": {
+    "url": "https://github.com/JonathanRReed/Apple-MCPs",
+    "source": "github",
+    "id": "1194217206",
+    "subfolder": "AppleNumbers-MCP"
+  },
+  "version": "1.1.6",
+  "websiteUrl": "https://github.com/JonathanRReed/Apple-MCPs",
+  "packages": [
+    {
+      "registryType": "pypi",
+      "registryBaseUrl": "https://pypi.org",
+      "identifier": "apple-numbers-mcp",
+      "version": "1.1.6",
+      "runtimeHint": "uvx",
+      "transport": {
+        "type": "stdio"
+      },
+      "environmentVariables": [
+        {
+          "name": "APPLE_NUMBERS_MCP_SAFETY_MODE",
+          "description": "Safety mode for Numbers operations: safe_readonly, safe_manage, or full_access.",
+          "isRequired": false,
+          "format": "string",
+          "choices": [
+            "safe_readonly",
+            "safe_manage",
+            "full_access"
+          ],
+          "default": "full_access"
+        },
+        {
+          "name": "APPLE_NUMBERS_MCP_ALLOWED_ROOTS",
+          "description": "Comma-separated folders Numbers may open spreadsheets from and export to. Unset uses APPLE_FILES_MCP_ALLOWED_ROOTS, then the default folders.",
+          "isRequired": false,
+          "format": "string"
+        }
+      ]
+    }
+  ]
+}

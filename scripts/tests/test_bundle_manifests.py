@@ -29,6 +29,7 @@ PREVIOUS_BUNDLE_ENV: dict[str, dict[str, str]] = {
     },
     "AppleMessages-MCP": {"APPLE_MESSAGES_MCP_SAFETY_MODE": "full_access"},
     "AppleNotes-MCP": {"APPLE_NOTES_MCP_SAFETY_MODE": "full_access"},
+    "AppleNumbers-MCP": {"APPLE_NUMBERS_MCP_SAFETY_MODE": "full_access"},
     "AppleReminders-MCP": {"APPLE_REMINDERS_MCP_SAFETY_MODE": "safe_manage"},
     "AppleShortcuts-MCP": {"APPLE_SHORTCUTS_MCP_SAFETY_MODE": "full_access"},
     "AppleSystem-MCP": {"APPLE_SYSTEM_MCP_SAFETY_MODE": "safe_manage"},
@@ -44,6 +45,7 @@ PREVIOUS_BUNDLE_ENV: dict[str, dict[str, str]] = {
         "APPLE_NOTES_MCP_SAFETY_MODE": "full_access",
         "APPLE_MESSAGES_MCP_SAFETY_MODE": "full_access",
         "APPLE_SHORTCUTS_MCP_SAFETY_MODE": "full_access",
+        "APPLE_NUMBERS_MCP_SAFETY_MODE": "full_access",
         "APPLE_MAIL_MCP_VISIBLE_DRAFTS": "true",  # was unset; the code default is true
     },
 }
@@ -53,6 +55,7 @@ PREVIOUS_BUNDLE_ENV: dict[str, dict[str, str]] = {
 BLANK_MEANS_UNSET = {
     "APPLE_MAIL_MCP_ALLOWED_ATTACHMENT_ROOT",
     "APPLE_SHORTCUTS_MCP_ALLOWED_ROOTS",
+    "APPLE_NUMBERS_MCP_ALLOWED_ROOTS",
     "APPLE_MESSAGES_MCP_ALLOWED_ROOTS",
     "APPLE_CALENDAR_MCP_ALLOWED_CALENDARS",
     "APPLE_CALENDAR_MCP_WRITE_ALLOWED_CALENDARS",

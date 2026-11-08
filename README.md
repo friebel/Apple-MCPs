@@ -63,6 +63,7 @@ Choose a standalone server to expose fewer apps to your client:
 | [Messages](AppleMessages-MCP/README.md) | Automation; Full Disk Access for history and reliable file sending | `messages_health` | `messages_permission_guide`, `messages_recheck_permissions` |
 | [Contacts](AppleContacts-MCP/README.md) | Contacts access | `contacts_health` | `contacts_permission_guide`, `contacts_recheck_permissions` |
 | [Notes](AppleNotes-MCP/README.md) | Automation access to Notes | `notes_health` | `notes_permission_guide`, `notes_recheck_permissions` |
+| [Numbers](AppleNumbers-MCP/README.md) | Automation access to Numbers | `numbers_health` | `numbers_permission_guide` |
 | [Shortcuts](AppleShortcuts-MCP/README.md) | Usually no separate prompt | `shortcuts_health` | `shortcuts_permission_guide`, `shortcuts_refresh_state` |
 | [Files](AppleFiles-MCP/README.md) | Allowed roots and protected-folder access | `files_health` | `files_permission_guide` |
 | [System](AppleSystem-MCP/README.md) | Some actions need System Events, Accessibility, or Automation | `system_health` | `system_permission_guide` |

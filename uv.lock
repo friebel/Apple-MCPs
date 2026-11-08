@@ -4,7 +4,7 @@ requires-python = ">=3.11"
 resolution-markers = [
     "python_full_version >= '3.14'",
     "python_full_version >= '3.12' and python_full_version < '3.14' and sys_platform == 'emscripten'",
-    "python_full_version < '3.12' or (python_full_version >= '3.12' and python_full_version < '3.14' and sys_platform != 'emscripten')",
+    "(python_full_version < '3.14' and sys_platform != 'emscripten') or (python_full_version < '3.12' and sys_platform == 'emscripten')",
 ]
 
 [manifest]
@@ -18,6 +18,7 @@ members = [
     "apple-mcp-notes",
     "apple-mcp-reminders",
     "apple-messages-mcp",
+    "apple-numbers-mcp",
     "apple-shortcuts-mcp",
     "apple-system-mcp",
     "apple-tools-mcp",
@@ -283,6 +284,32 @@ requires-dist = [
 provides-extras = ["dev"]
 
 [[package]]
+name = "apple-numbers-mcp"
+version = "1.1.6"
+source = { editable = "AppleNumbers-MCP" }
+dependencies = [
+    { name = "apple-mcp-common" },
+    { name = "mcp" },
+    { name = "pydantic" },
+]
+
+[package.optional-dependencies]
+dev = [
+    { name = "pytest" },
+    { name = "ruff" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "apple-mcp-common", editable = "AppleMCPCommon" },
+    { name = "mcp", specifier = ">=2.3.0,<3" },
+    { name = "pydantic", specifier = ">=2.14.1" },
+    { name = "pytest", marker = "extra == 'dev'", specifier = ">=8,<10" },
+    { name = "ruff", marker = "extra == 'dev'", specifier = ">=0.17.2,<1" },
+]
+provides-extras = ["dev"]
+
+[[package]]
 name = "apple-shortcuts-mcp"
 version = "1.1.6"
 source = { editable = "AppleShortcuts-MCP" }
@@ -348,6 +375,7 @@ dependencies = [
     { name = "apple-mcp-notes" },
     { name = "apple-mcp-reminders" },
     { name = "apple-messages-mcp" },
+    { name = "apple-numbers-mcp" },
     { name = "apple-shortcuts-mcp" },
     { name = "apple-system-mcp" },
     { name = "mcp" },
@@ -371,6 +399,7 @@ requires-dist = [
     { name = "apple-mcp-notes", editable = "AppleNotes-MCP" },
     { name = "apple-mcp-reminders", editable = "AppleReminders-MCP" },
     { name = "apple-messages-mcp", editable = "AppleMessages-MCP" },
+    { name = "apple-numbers-mcp", editable = "AppleNumbers-MCP" },
     { name = "apple-shortcuts-mcp", editable = "AppleShortcuts-MCP" },
     { name = "apple-system-mcp", editable = "AppleSystem-MCP" },
     { name = "mcp", specifier = ">=2.3.0,<3" },

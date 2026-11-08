@@ -19,6 +19,7 @@ DOMAIN_PACKAGES = (
     DomainPackage("AppleReminders-MCP", "apple_reminders_mcp", "apple-reminders-mcp"),
     DomainPackage("AppleShortcuts-MCP", "apple_shortcuts_mcp", "apple-shortcuts-mcp"),
     DomainPackage("AppleNotes-MCP", "apple_notes_mcp", "apple-notes-mcp"),
+    DomainPackage("AppleNumbers-MCP", "apple_numbers_mcp", "apple-numbers-mcp"),
     DomainPackage("AppleMessages-MCP", "apple_messages_mcp", "apple-messages-mcp"),
     DomainPackage("AppleContacts-MCP", "apple_contacts_mcp", "apple-contacts-mcp"),
     DomainPackage("AppleFiles-MCP", "apple_files_mcp", "apple-files-mcp"),

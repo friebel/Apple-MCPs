@@ -406,3 +406,21 @@ def test_update_note_sets_title_after_body_update() -> None:
     source = (repo_root / "src" / "apple_notes_mcp" / "applescripts" / "update_note.applescript").read_text()
 
     assert source.index("set body of noteRef to my compose_note_body(noteBody, tagsCsv)") < source.index('if titleText is not "" then set name of noteRef to titleText')
+
+
+def test_update_note_rejects_password_protected_note(monkeypatch) -> None:
+    bridge = AppleNotesBridge(Path("/tmp/scripts"))
+    locked = _note_payload("note-1", "Secret") | {"password_protected": True}
+
+    def fake_run_script(script_name: str, *args: str) -> dict[str, object]:
+        assert script_name != "update_note.applescript"
+        if script_name == "get_note.applescript":
+            return {"found": True, "note": locked}
+        return {"items": []}
+
+    monkeypatch.setattr(bridge, "_run_script", fake_run_script)
+
+    with pytest.raises(NotesBridgeError) as excinfo:
+        bridge.update_note("note-1", body_html="<div>x</div>")
+
+    assert excinfo.value.error_code == "NOTE_LOCKED"

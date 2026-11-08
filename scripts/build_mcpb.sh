@@ -29,7 +29,7 @@ OUT_DIR="$REPO_DIR/dist/mcpb"
 
 ALL_SERVERS="Apple-Tools-MCP Apple-Calendar-MCP AppleContacts-MCP AppleFiles-MCP AppleMail-MCP AppleMaps-MCP AppleMessages-MCP AppleNotes-MCP AppleReminders-MCP AppleShortcuts-MCP AppleSystem-MCP"
 # Domain packages the unified Apple-Tools-MCP server imports at runtime.
-SIBLING_SERVERS="AppleMail-MCP Apple-Calendar-MCP AppleReminders-MCP AppleShortcuts-MCP AppleNotes-MCP AppleMessages-MCP AppleContacts-MCP AppleFiles-MCP AppleSystem-MCP AppleMaps-MCP"
+SIBLING_SERVERS="AppleMail-MCP Apple-Calendar-MCP AppleReminders-MCP AppleShortcuts-MCP AppleNotes-MCP AppleNumbers-MCP AppleMessages-MCP AppleContacts-MCP AppleFiles-MCP AppleSystem-MCP AppleMaps-MCP"
 
 STAGE_ROOT="$(mktemp -d "${TMPDIR:-/tmp}/apple-mcpb.XXXXXX")"
 trap 'rm -rf "$STAGE_ROOT"' EXIT
@@ -52,6 +52,7 @@ dist_name_for_folder() {
     AppleMaps-MCP) echo "apple-maps-mcp" ;;
     AppleMessages-MCP) echo "apple-messages-mcp" ;;
     AppleNotes-MCP) echo "apple-mcp-notes" ;;
+    AppleNumbers-MCP) echo "apple-numbers-mcp" ;;
     AppleReminders-MCP) echo "apple-mcp-reminders" ;;
     AppleShortcuts-MCP) echo "apple-shortcuts-mcp" ;;
     AppleSystem-MCP) echo "apple-system-mcp" ;;
@@ -61,7 +62,7 @@ dist_name_for_folder() {
 
 # All local workspace packages a staged pyproject may reference, as
 # "distribution:Folder" pairs (bash 3.2 has no associative arrays).
-WORKSPACE_PKGS="apple-mcp-common:AppleMCPCommon apple-tools-mcp:Apple-Tools-MCP apple-calendar-mcp:Apple-Calendar-MCP apple-contacts-mcp:AppleContacts-MCP apple-files-mcp:AppleFiles-MCP apple-mcp-mail:AppleMail-MCP apple-maps-mcp:AppleMaps-MCP apple-messages-mcp:AppleMessages-MCP apple-mcp-notes:AppleNotes-MCP apple-mcp-reminders:AppleReminders-MCP apple-shortcuts-mcp:AppleShortcuts-MCP apple-system-mcp:AppleSystem-MCP"
+WORKSPACE_PKGS="apple-mcp-common:AppleMCPCommon apple-tools-mcp:Apple-Tools-MCP apple-calendar-mcp:Apple-Calendar-MCP apple-contacts-mcp:AppleContacts-MCP apple-files-mcp:AppleFiles-MCP apple-mcp-mail:AppleMail-MCP apple-maps-mcp:AppleMaps-MCP apple-messages-mcp:AppleMessages-MCP apple-mcp-notes:AppleNotes-MCP apple-numbers-mcp:AppleNumbers-MCP apple-mcp-reminders:AppleReminders-MCP apple-shortcuts-mcp:AppleShortcuts-MCP apple-system-mcp:AppleSystem-MCP"
 
 # copy_tree <src_dir> <dst_dir>
 # Copy a directory tree, dropping build/runtime junk and repo-only launch glue

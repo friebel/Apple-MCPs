@@ -173,6 +173,23 @@ from .notes_create_folder import notes_create_folder
 from .notes_rename_folder import notes_rename_folder
 from .notes_delete_folder import notes_delete_folder
 from .notes_list_attachments import notes_list_attachments
+from .numbers_health import numbers_health
+from .numbers_list_documents import numbers_list_documents
+from .numbers_open_document import numbers_open_document
+from .numbers_create_document import numbers_create_document
+from .numbers_save_document import numbers_save_document
+from .numbers_close_document import numbers_close_document
+from .numbers_list_sheets import numbers_list_sheets
+from .numbers_list_tables import numbers_list_tables
+from .numbers_create_table import numbers_create_table
+from .numbers_add_rows import numbers_add_rows
+from .numbers_delete_rows import numbers_delete_rows
+from .numbers_add_columns import numbers_add_columns
+from .numbers_delete_columns import numbers_delete_columns
+from .numbers_set_format import numbers_set_format
+from .numbers_read_range import numbers_read_range
+from .numbers_write_range import numbers_write_range
+from .numbers_export_document import numbers_export_document
 from .messages_health import messages_health
 from .messages_list_conversations import messages_list_conversations
 from .messages_get_conversation import messages_get_conversation
@@ -357,6 +374,23 @@ __all__ = [
     "notes_rename_folder",
     "notes_delete_folder",
     "notes_list_attachments",
+    "numbers_health",
+    "numbers_list_documents",
+    "numbers_open_document",
+    "numbers_create_document",
+    "numbers_save_document",
+    "numbers_close_document",
+    "numbers_list_sheets",
+    "numbers_list_tables",
+    "numbers_create_table",
+    "numbers_add_rows",
+    "numbers_delete_rows",
+    "numbers_add_columns",
+    "numbers_delete_columns",
+    "numbers_set_format",
+    "numbers_read_range",
+    "numbers_write_range",
+    "numbers_export_document",
     "messages_health",
     "messages_list_conversations",
     "messages_get_conversation",

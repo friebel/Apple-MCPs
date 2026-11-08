@@ -34,6 +34,7 @@ dependencies = [
   "apple-maps-mcp>=1.1.6,<2",
   "apple-messages-mcp>=1.1.6,<2",
   "apple-mcp-notes>=1.1.6,<2",
+  "apple-numbers-mcp>=1.1.6,<2",
   "apple-mcp-reminders>=1.1.6,<2",
   "apple-shortcuts-mcp>=1.1.6,<2",
   "apple-system-mcp>=1.1.6,<2",
@@ -78,6 +79,7 @@ apple-mcp-mail = { workspace = true }
 apple-maps-mcp = { workspace = true }
 apple-messages-mcp = { workspace = true }
 apple-mcp-notes = { workspace = true }
+apple-numbers-mcp = { workspace = true }
 apple-mcp-reminders = { workspace = true }
 apple-shortcuts-mcp = { workspace = true }
 apple-system-mcp = { workspace = true }

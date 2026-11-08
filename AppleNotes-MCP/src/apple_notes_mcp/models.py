@@ -80,6 +80,7 @@ class NoteSummary(BaseModel):
 
 class NoteDetail(NoteSummary):
     body_html: str = ""
+    truncated: bool = Field(default=False, description="True when plaintext/body_html were cut to the requested max_chars")
     attachments: list[AttachmentInfo] = Field(default_factory=list)
 
 
